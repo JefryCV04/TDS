@@ -3,7 +3,7 @@ import { config } from 'dotenv';
 
 config();
 
-export const TDSDataSource = new DataSource({
+export const GUSystemDataSource = new DataSource({
   type: 'mysql',
   host: process.env.DATABASE_HOST,
   port: parseInt(process.env.DATABASE_PORT),
@@ -23,5 +23,5 @@ export async function initialize() {
     `Connecting to SQL Instance on: ${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}/${process.env.DATABASE_SCHEMA}`
   );
 
-  await TDSDataSource.initialize();
+  await GUSystemDataSource.initialize();
 }

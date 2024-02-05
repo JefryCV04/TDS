@@ -9,7 +9,7 @@ import { ValidationError } from './errors/ValidationError';
 import { AuthChecker } from './utilities/AuthChecker';
 import { Container } from 'typedi';
 
-export interface TDSContext {
+export interface GUSystemContext {
   user: {
     email: string;
     token: string;
@@ -26,12 +26,12 @@ export class Apollo {
       container: Container,
     });
 
-    const server = new ApolloServer<TDSContext>({
+    const server = new ApolloServer<GUSystemContext>({
       schema,
       formatError: Apollo.customFormatError,
     });
 
-    const { url } = await startStandaloneServer<TDSContext>(server, {
+    const { url } = await startStandaloneServer<GUSystemContext>(server, {
       listen: { port: parseInt(process.env.BACKEND_PORT) },
       context: async ({ req }) => {
         const token = req.headers.authorization || '';

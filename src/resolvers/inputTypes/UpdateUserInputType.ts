@@ -14,25 +14,10 @@ export class UpdateUserInputType implements Partial<User> {
   lastName: string;
 
   @Field()
+  username: string;
+
+  @Field()
   @IsEmail({}, { message: 'Invalid Email' })
   email: string;
 
-  @Field({ nullable: true })
-  @IsEmail({}, { message: 'Invalid External Email' })
-  externalEmail?: string;
-
-  @Field({ nullable: true })
-  imageURL?: string;
-
-  @Field(() => [String])
-  roleIds!: string[];
-
-  @Field(() => [String])
-  departmentIds!: string[];
-
-  @Field({ nullable: true })
-  userStatusId?: string;
-
-  @Field({ nullable: true })
-  employeePositionId?: string;
 }

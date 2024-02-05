@@ -1,15 +1,15 @@
 import { AuthCheckerInterface, ResolverData } from 'type-graphql';
-import { TDSContext } from '../apollo';
+import { GUSystemContext } from '../apollo';
 import { GraphQLError } from 'graphql';
 import { Service } from 'typedi';
 import { UserService } from '../services/UserService';
 
 @Service()
-export class AuthChecker implements AuthCheckerInterface<TDSContext> {
+export class AuthChecker implements AuthCheckerInterface<GUSystemContext> {
   constructor(private readonly userService: UserService) {}
 
   async check(
-    { root, args, context, info }: ResolverData<TDSContext>,
+    { root, args, context, info }: ResolverData<GUSystemContext>,
     roles: string[]
   ): Promise<boolean> {
     if (!context.user) {
@@ -30,18 +30,6 @@ export class AuthChecker implements AuthCheckerInterface<TDSContext> {
           http: { status: 401 },
         },
       });
-    }
-
-    if (user.userStatus.name === 'Inactivo') {
-      throw new GraphQLError(
-        'Su usuario está desactivado, favor contactar con su Administrador!',
-        {
-          extensions: {
-            code: 'UNAUTHENTICATED',
-            http: { status: 401 },
-          },
-        }
-      );
     }
 
     return true;
