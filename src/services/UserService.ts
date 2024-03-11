@@ -20,17 +20,16 @@ export class UserService {
     });
   }
 
-  public async getOne(userId: string) {
+  public async getOne(entityId: string) {
     return GUSystemDataSource.manager.findOne(User, {
       where: {
-        id: userId,
+        id: entityId,
       },
     });
   }
 
-  public async save(user: Partial<User>) {
-    const savedUser = await GUSystemDataSource.manager.save(User, user);
+  public async save(entity: Partial<User>) {
+    const savedUser = await GUSystemDataSource.manager.save(User, entity);
     return this.getOne(savedUser.id);
   }
-
 }
