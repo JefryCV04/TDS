@@ -22,9 +22,9 @@ export class ForumInputType implements Partial<Forum> {
   @Field({ nullable: true })
   postId?: string;
 
-  @Field({ nullable: true })
+  @Field(()=>[String],{ nullable: true })
   commentsIds?: string[];
 
-  @Field({ nullable: true })
+  @Field(()=>[String],{ nullable: true })
   membersIds?: string[];
 }

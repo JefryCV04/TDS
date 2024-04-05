@@ -1,7 +1,6 @@
 import { IsEmail } from 'class-validator';
 import { Field, InputType } from 'type-graphql';
 import { User } from '../../entities/User';
-import { Comment } from '../../entities/Comment';
 
 @InputType()
 export class UpdateUserInputType implements Partial<User> {
@@ -24,18 +23,18 @@ export class UpdateUserInputType implements Partial<User> {
   @Field({ nullable: true })
   password?: string;
 
-  @Field({ nullable: true })
+  @Field(()=> [String],{ nullable: true })
   commentsIds?: string[];
 
-  @Field({ nullable: true })
+  @Field(()=> [String],{ nullable: true })
   likesIds?: string[];
 
-  @Field({ nullable: true })
+  @Field(()=> [String],{ nullable: true })
   postsIds?: string[];
 
-  @Field({ nullable: true })
+  @Field(()=> [String],{ nullable: true })
   receivedMessagesIds?: string[];
 
-  @Field({ nullable: true })
+  @Field(()=> [String],{ nullable: true })
   sendMessagesIds?: string[];
 }
