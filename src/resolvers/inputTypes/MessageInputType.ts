@@ -25,6 +25,6 @@ export class MessageInputType implements Partial<Message> {
   @Field({ nullable: true })
   parentMessageId?: string;
 
-  @Field(()=>[String],{ nullable: true })
+  @Field({ nullable: true })
   repliesIds?: string[];
 }

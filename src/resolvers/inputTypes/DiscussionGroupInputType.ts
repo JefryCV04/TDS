@@ -10,9 +10,9 @@ export class DiscussionGroupInputType implements Partial<DiscussionGroup> {
   @Field()
   name: string;
 
-  @Field(()=>[String],{ nullable: true })
+  @Field({ nullable: true })
   membersIds?: string[];
 
-  @Field(()=>[String],{ nullable: true })
+  @Field({ nullable: true })
   messagesIds?: string[];
 }

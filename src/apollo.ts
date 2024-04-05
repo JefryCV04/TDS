@@ -9,6 +9,7 @@ import { ValidationError } from './errors/ValidationError';
 import { AuthChecker } from './utilities/AuthChecker';
 import { Container } from 'typedi';
 
+
 export interface GUSystemContext {
   user: {
     email: string;
@@ -52,7 +53,11 @@ export class Apollo {
     const originalError = unwrapResolverError(error);
 
     if (originalError instanceof ArgumentValidationError) {
-      return new ValidationError(originalError.validationErrors);
+      // Aquí exploramos la estructura de originalError para obtener información de validación
+      const validationErrors = originalError['validationErrors'] || [];
+      
+      // Manejar errores de validación según tus necesidades
+      return new ValidationError(validationErrors.map(error => error.message).join(', '));
     }
 
     return formattedError;

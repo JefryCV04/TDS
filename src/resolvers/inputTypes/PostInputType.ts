@@ -16,9 +16,9 @@ export class PostInputType implements Partial<Post> {
   @Field({ nullable: true })
   authorId?: string;
 
-  @Field(()=>[String],{ nullable: true })
+  @Field({ nullable: true })
   commentsIds?: string[];
 
-  @Field(()=>[String],{ nullable: true })
+  @Field({ nullable: true })
   likesIds?: string[];
 }
