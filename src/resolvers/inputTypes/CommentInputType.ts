@@ -22,9 +22,9 @@ export class CommentInputType implements Partial<Comment> {
   @Field({ nullable: true })
   replyToId?: string;
 
-  @Field({ nullable: true })
-  public repliesIds?: string[];
+  @Field(()=>[String],{ nullable: true })
+   repliesIds?: string[];
 
-  @Field({ nullable: true })
+  @Field(()=>[String],{ nullable: true })
   likesIds?: string[];
 }

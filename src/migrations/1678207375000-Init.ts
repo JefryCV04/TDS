@@ -102,7 +102,7 @@ export class Init1678207375000 implements MigrationInterface {
         await queryRunner.query(`
         INSERT INTO \`rol\` (\`rolname\`) VALUES
             ('Estudiante'),
-            ('Maestro/a'),
+            ('Maestro/a')
         `);
 
         await queryRunner.query(`
