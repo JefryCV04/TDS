@@ -62,4 +62,5 @@ export class User extends IEntity {
   @OneToMany(() => Message, (message) => message.author)
   public sendMessages?: Message[];
     static findOneOrFail: any;
+    
 }
