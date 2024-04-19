@@ -32,10 +32,10 @@ export class Forum extends INameableEntity {
   public authorId?: string;
 
   @Field(() => User)
-  @ManyToOne(() => User, (user) => user.posts,{ eager: true})
+  @ManyToOne(() => User, (user) => user.posts)
   public author: User;
 
   @Field(() => [Comment], { nullable: true })
-  @ManyToOne(() => Comment, (msg) => msg.forum,{ eager: true, nullable: true })
+  @ManyToOne(() => Comment, (msg) => msg.forum, { nullable: true })
   public comments?: Comment[];
 }

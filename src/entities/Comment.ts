@@ -39,15 +39,15 @@ export class Comment extends IEntity {
   public post: Post;
 
   @Field(() => [Like], { nullable: true })
-  @OneToMany(() => Like, (like) => like.comment,{ eager: true, nullable: true })
+  @OneToMany(() => Like, (like) => like.comment, { nullable: true })
   public likes?: Like[];
 
   @Field(() => [Post], { nullable: true })
-  @OneToMany(() => Post, (post) => post.comments,{ eager: true, nullable: true })
+  @OneToMany(() => Post, (post) => post.comments, { nullable: true })
   public replies?: Comment[];
 
   @Field(() => Comment, { nullable: true })
-  @ManyToOne(() => Comment, (comment) => comment.replies,{ eager: true,nullable: true })
+  @ManyToOne(() => Comment, (comment) => comment.replies, { nullable: true })
   public replyTo?: Comment;
 
   @Column({ type: 'uuid', length: 36, nullable: true })
@@ -57,6 +57,6 @@ export class Comment extends IEntity {
   forumId: string;
 
   @Field(() => Forum, { nullable: true })
-  @ManyToOne(() => Forum, (forum) => forum.comments,{ eager: true, nullable: true })
+  @ManyToOne(() => Forum, (forum) => forum.comments, { nullable: true })
   forum: Forum;
 }

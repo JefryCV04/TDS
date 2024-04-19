@@ -16,14 +16,14 @@ export class Like extends IEntity {
   userId?: string;
 
   @Field(() => Post, { nullable: true })
-  @ManyToOne(() => Post, (post) => post.likes,{ eager: true, nullable: true })
+  @ManyToOne(() => Post, (post) => post.likes, { nullable: true })
   post?: Post;
 
   @Column({ type: 'uuid', length: 36 })
   postId?: string;
 
   @Field(() => Comment, { nullable: true })
-  @ManyToOne(() => Comment, (comment) => comment.likes,{ eager: true, nullable: true })
+  @ManyToOne(() => Comment, (comment) => comment.likes, { nullable: true })
   comment?: Comment;
 
   @Column({ type: 'uuid', length: 36 })

@@ -21,6 +21,6 @@ export class DiscussionGroup extends INameableEntity {
   members: User[];
 
   @Field(() => [Message], { nullable: true })
-  @ManyToOne(() => Message, (msg) => msg.discussionGroup,{ eager: true, nullable: true })
+  @ManyToOne(() => Message, (msg) => msg.discussionGroup, { nullable: true })
   messages?: Message[];
 }
