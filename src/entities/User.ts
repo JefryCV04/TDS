@@ -42,24 +42,24 @@ export class User extends IEntity {
   @Column({ nullable: true }) // La columna puede ser nullable si la imagen no es requerida
   public profileImage?: string; // URL de la imagen de perfil
 
-  @Field(() => [Comment], { nullable: true })
-  @OneToMany(() => Comment, (comment) => comment.author, { nullable: true })
+  @Field(() => [Comment], {nullable:true })
+  @OneToMany(() => Comment, (comment) => comment.author, {nullable:true, eager: true })
   public comments: Comment[];
 
-  @Field(() => [Like], { nullable: true })
-  @OneToMany(() => Like, (likes) => likes.user, { nullable: true })
+  @Field(() => [Like], {nullable:true })
+  @OneToMany(() => Like, (likes) => likes.user, {nullable:true, eager: true })
   public likes?: Like[];
 
-  @Field(() => [Post], { nullable: true })
-  @OneToMany(() => Post, (post) => post.author, { nullable: true })
+  @Field(() => [Post], {nullable:true })
+  @OneToMany(() => Post, (post) => post.author, {nullable:true, eager: true })
   public posts?: Post[];
 
-  @Field(() => [Message], { nullable: true })
-  @OneToMany(() => Message, (message) => message.recipient)
+  @Field(() => [Message], {nullable:true})
+  @OneToMany(() => Message, (message) => message.recipient,{ eager: true})
   public receivedMessages?: Message[];
 
-  @Field(() => [Message], { nullable: true })
-  @OneToMany(() => Message, (message) => message.author)
+  @Field(() => [Message], {nullable:true})
+  @OneToMany(() => Message, (message) => message.author,{ eager: true})
   public sendMessages?: Message[];
     static findOneOrFail: any;
 }

@@ -13,7 +13,7 @@ export class Rol {
   @Column()
   public rolname: string;
 
-  @OneToMany(() => User, (user) => user.rol) // Indica que es una relación OneToMany
+  @OneToMany(() => User, (user) => user.rol,{ eager: true}) // Indica que es una relación OneToMany
   @Field(() => [User])
   public users!: User[];
 }

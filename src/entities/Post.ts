@@ -29,23 +29,23 @@ export class Post extends IEntity {
   @Column({ type: 'uuid', length: 36 })
   public authorId?: string;
 
-  @Field(() => PublicationStatus)
-  @ManyToOne(() => PublicationStatus, { eager: true })
+  @Field(() => PublicationStatus, {nullable:true})
+  @ManyToOne(() => PublicationStatus, {nullable:true, eager: true })
   status: PublicationStatus;
 
-  @Field(() => User)
-  @ManyToOne(() => User, (user) => user.posts)
+  @Field(() => User, {nullable:true})
+  @ManyToOne(() => User, (user) => user.posts, {nullable:true, eager: true })
   author: User;
 
   @Field(() => PublicationPrivacy)
-  @ManyToOne(() => PublicationPrivacy, { eager: true })
+  @ManyToOne(() => PublicationPrivacy, {nullable:true, eager: true })
   privacy: PublicationPrivacy;
 
-  @Field(() => [Comment])
-  @OneToMany(() => Comment, (comment) => comment.post)
+  @Field(() => [Comment], {nullable:true})
+  @OneToMany(() => Comment, (comment) => comment.post, {nullable:true, eager: true })
   comments: Comment[];
 
-  @Field(() => [Like])
-  @OneToMany(() => Like, (like) => like.post)
+  @Field(() => [Like], {nullable:true})
+  @OneToMany(() => Like, (like) => like.post, {nullable:true, eager: true })
   likes: Like[];
 }
