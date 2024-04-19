@@ -1,11 +1,10 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { Field, ObjectType } from 'type-graphql';
 import { IEntity } from '../interfaces/IEntity';
 import { Comment } from './Comment';
 import { Like } from './Like';
 import { Post } from './Post';
 import { Message } from './Message';
-import { Rol } from './Rol';
 
 @Entity()
 @ObjectType({ implements: IEntity })
@@ -29,19 +28,6 @@ export class User extends IEntity {
   @Column({ unique: true })
   public email!: string;
 
-  @Field()
-  @Column({ unique: true })
-  public roleId!: string;
-
-  @ManyToOne(() => Rol, (rol) => rol.users, { eager: true }) // Indica que es una relación ManyToOne
-  @JoinColumn({ name: 'roleId', referencedColumnName: 'id' })
-  @Field(() => Rol)
-  public rol!: Rol;
-  
-  @Field({ nullable: true })
-  @Column({ nullable: true }) // La columna puede ser nullable si la imagen no es requerida
-  public profileImage?: string; // URL de la imagen de perfil
-
   @Field(() => [Comment], { nullable: true })
   @OneToMany(() => Comment, (comment) => comment.author, { nullable: true })
   public comments: Comment[];
@@ -61,5 +47,4 @@ export class User extends IEntity {
   @Field(() => [Message], { nullable: true })
   @OneToMany(() => Message, (message) => message.author)
   public sendMessages?: Message[];
-    static findOneOrFail: any;
 }
