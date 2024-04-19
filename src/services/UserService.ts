@@ -32,28 +32,4 @@ export class UserService {
     const savedUser = await GUSystemDataSource.manager.save(User, entity);
     return this.getOne(savedUser.id);
   }
-
-  public async update(entityId: string, entity: Partial<User>) {
-    await GUSystemDataSource.manager.update(User, entityId, entity);
-    return this.getOne(entityId);
-  }
-
-  public async remove(entityId: string) {
-    await GUSystemDataSource.manager.delete(User, entityId);
-    return entityId;
-  }
-
-  public async updateProfileImage(entityId: string, profileImage: string) {
-    const user = await GUSystemDataSource.manager.findOne(User, {
-      where: {
-        id: entityId,
-      },
-    });
-    if (!user) {
-      throw new Error('Usuario no encontrado');
-    }
-
-    user.profileImage = profileImage;
-    return GUSystemDataSource.manager.save(User, user);
-  }
 }
