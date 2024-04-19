@@ -18,6 +18,7 @@ import { LoginArgs } from './argsTypes/LoginArgs';
 import { GUSystemContext } from '../apollo';
 import { UpdateUserInputType } from './inputTypes/UpdateUserInputType';
 import { Service } from 'typedi';
+import { Rol } from '../entities/Rol';
 
 @Service()
 @Resolver(User)
@@ -79,8 +80,20 @@ export class UserResolver {
   })
   async saveUser(@Arg('user') saveUserInputType: UserInputType): Promise<User> {
     try {
+      // Obtén el rol por nombre antes de crear el usuario
+      const rol = await GUSystemDataSource.manager.findOne(Rol, {
+        where: { rolname: saveUserInputType.rolname },
+      });
+
+      if (!rol) {
+        throw new Error(
+          `Rol with rolname ${saveUserInputType.rolname} not found.`
+        );
+      }
+
       const user = await GUSystemDataSource.manager.create(User, {
         ...saveUserInputType,
+        rol,
         password: await bcrypt.hash(saveUserInputType.password, 10),
       });
 
@@ -100,8 +113,18 @@ export class UserResolver {
     @Arg('user') updateUserInputType: UpdateUserInputType
   ): Promise<User> {
     try {
+      const rol = await GUSystemDataSource.manager.findOne(Rol, {
+        where: { rolname: updateUserInputType.rolname },
+      });
+
+      if (!rol) {
+        throw new Error(
+          `Rol with rolname ${updateUserInputType.rolname} not found.`
+        );
+      }
       const user = GUSystemDataSource.manager.create(User, {
         ...updateUserInputType,
+        rol,
       });
 
       return this.userService.save(user);
